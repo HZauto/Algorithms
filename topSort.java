@@ -255,7 +255,7 @@ class Graph {
     }
 }
 
-public class lab3{
+public class topSort{
     public static void main(String[] args) throws IOException {
         new Graph();
     }
