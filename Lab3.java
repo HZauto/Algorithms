@@ -111,7 +111,7 @@ class Graph {
             int v = obj.nextInt();
             this.addEdge(u - 1, v - 1); // 0 based indexing
         }
-        obj.close();
+
     }
 
     private void addVertex() {
@@ -169,14 +169,18 @@ class Graph {
     public void scc() {
         boolean[] visited = new boolean[numVertex];
         Stack<Integer> order = new Stack<>();
+        Arrays.fill(visited, false);
 
         for (int i = 0; i < numVertex; i++) {
+
             if (!visited[i]) {
                 DFS(i, visited, order);
             }
         }
-
-        // Arrays.fill(visited, false);
+        // while (!order.isEmpty()) {
+        // System.out.print(order.pop() + " ");
+        // }
+        Arrays.fill(visited, false);
 
         while (!order.isEmpty()) {
             int vertex = order.pop();
@@ -197,14 +201,45 @@ class Graph {
     }
 
     public void condensedGraph() {
+        condensed = new ArrayList<>();
+        int roots[] = new int[numVertex];
+        Arrays.fill(roots, 0);
+        for (LinkedList<Integer> component : components) {
+            int root = Collections.min(component);
+            for (int v : component) {
+                roots[v] = root;
+            }
+        }
+        for (int i = 0; i < numVertex; i++) {
+            condensed.add(new LinkedList<Integer>());
+        }
+        for (int i = 0; i < numVertex; i++) {
+            for (int v : getAdjList(i)) {
+                if (roots[v] != roots[i]) {
+                    condensed.get(roots[i]).add(roots[v]);
+                }
+            }
+        }
+        for (int i = 0; i < condensed.size(); i++) {
+            System.out.print((i + 1) + "-> ");
+            for (int vertex : condensed.get(i)) { // along with adjacent vertex
+                System.out.print((vertex + 1) + " ");
+            }
+            System.out.println();
+        }
+    }
 
+    public void close() {
+        obj.close();
     }
 }
 
 public class Lab3 {
     public static void main(String[] args) throws IOException {
         Graph g = new Graph();
-        g.displayGraph();
+        // g.displayGraph();
         g.scc();
+        g.condensedGraph();
+        g.close();
     }
 }
