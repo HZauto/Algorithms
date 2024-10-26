@@ -93,7 +93,7 @@ class Graph {
 
     FastIO obj;
 
-    Graph() throws IOException { // (String filename)
+    Graph() { // (String filename)
         // File file = new File(filename);
         obj = new FastIO();
         numVertex = obj.nextInt();
@@ -165,6 +165,16 @@ class Graph {
                 continue;
             System.out.println("shortest path for vertex " + (i) + " : " + distance[i]);
         }
+        // path
+        Stack<Integer> path = new Stack<>();
+        int current = 5; // destination vertex
+        while (prev[current] != -1) {
+            path.push(current);
+            current = prev[current];
+        }
+        while (!path.isEmpty()) {
+            obj.print(path.pop() + " ");
+        }
     }
 
     public void DFS(int vertex, boolean[] visited, List<List<Integer>> adjacencyList, List<Integer> output) {
@@ -202,7 +212,6 @@ class Graph {
         Arrays.fill(visited, false);
 
         for (int i = 1; i < numVertex + 1; i++) {
-
             if (!visited[i]) {
                 DFS(i, visited, adjList, order);
             }
@@ -255,8 +264,12 @@ class Graph {
     }
 }
 
-public class template {
-    public static void main(String[] args) throws IOException {
+public class template implements Runnable {
+    public static void main(String[] args) {
+        new Thread(null, new template(), "whatever", 1 << 26).start();
+    }
+
+    public void run() {
         Graph g = new Graph();
         g.BFS(1);
         g.scc();
