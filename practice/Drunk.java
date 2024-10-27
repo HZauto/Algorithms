@@ -240,9 +240,9 @@ class Graph {
     }
 }
 
-public class Main implements Runnable {
+public class Drunk implements Runnable {
     public static void main(String[] args) {
-        new Thread(null, new Main(), "whatever", 1 << 26).start();
+        new Thread(null, new Drunk(), "whatever", 1 << 26).start();
     }
 
     public void run() {
