@@ -99,16 +99,14 @@ class Graph {
             if (i == source - 1)
                 continue;
             System.out.println("shortest path for vertex " + (i + 1) + " : " + distance[i]);
-
-            /*
-             * int curVertex = i;
-             * while (curVertex != -1) {
-             * System.out.print((curVertex + 1) + " ");
-             * curVertex = prev[curVertex];
-             * }
-             * System.out.println();
-             */
-
+            
+            // int curVertex = i;
+            // while (curVertex != -1) {
+            // System.out.print((curVertex + 1) + " ");
+            // curVertex = prev[curVertex];
+            // }
+            // System.out.println();
+             
             printPath(i, prev);
             System.out.println();
         }
