@@ -13,10 +13,10 @@ public class rockClimbing {
                 wall[i][j] = sc.nextInt();
             }
         }
-        energy(wall, n, m);
+        climb(wall, n, m);
     }
 
-    public static void energy(int wall[][], int n, int m) {
+    public static void climb(int wall[][], int n, int m) {
         int DP[][] = new int[n + 1][m + 2];
 
         for (int j = 1; j <= m; j++) {
